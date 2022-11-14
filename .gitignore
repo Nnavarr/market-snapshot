@@ -105,3 +105,6 @@ dist
 
 # virtual env
 venv
+
+# passwords
+env_var.txt
