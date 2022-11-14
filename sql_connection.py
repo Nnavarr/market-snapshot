@@ -12,4 +12,3 @@ conn = psycopg2.connect(
   user='postgres',
   password=pg_password[0]
 )
-
