@@ -1,4 +1,4 @@
 CREATE TABLE prime_rates (
-  `date`              DATE,
+  date              DATE,
   rate                DECIMAL
 );

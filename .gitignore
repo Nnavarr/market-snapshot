@@ -108,3 +108,9 @@ venv
 
 # passwords
 env_var.txt
+
+# cache
+__pycache__
+
+# excel
+excel/

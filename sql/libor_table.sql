@@ -1,10 +1,10 @@
 CREATE TABLE libor_rates (
-  `date`            DATE,
-  1_mo_rate         DECIMAL,
-  2_mo_rate         DECIMAL,
-  3_mo_rate         DECIMAL,
-  4_mo_rate         DECIMAL,
-  5_mo_rate         DECIMAL,
-  6_mo_rate         DECIMAL,
-  1_yr_rate         DECIMAL
+  date            DATE,
+  one_mo_rate         DECIMAL,
+  two_mo_rate         DECIMAL,
+  three_mo_rate         DECIMAL,
+  four_mo_rate         DECIMAL,
+  five_mo_rate         DECIMAL,
+  six_mo_rate         DECIMAL,
+  one_yr_rate         DECIMAL
 );
