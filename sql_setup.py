@@ -30,7 +30,7 @@ for file in sql_files:
       sql_file = f.read()
       cursor.execute(sql_file)
       print(f'{file} complete.')
-
+      
 # commit and close connections
 conn.commit()
 cursor.close()

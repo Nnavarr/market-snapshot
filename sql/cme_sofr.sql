@@ -1,7 +1,7 @@
-CREATE TABLE cme_sofr (
+CREATE TABLE IF NOT EXISTS cme_sofr (
   date              DATE,
-  one_month           DECIMAL,
-  three_month         DECIMAL,
-  six_month           DECIMAL,
-  twelve_month        DECIMAL
+  one_month         DECIMAL(5, 4),
+  three_month       DECIMAL(5, 4),
+  six_month         DECIMAL(5, 4),
+  twelve_month      DECIMAL(5, 4)
 );

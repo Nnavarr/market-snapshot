@@ -1,4 +1,4 @@
-CREATE TABLE prime_rates (
+CREATE TABLE IF NOT EXISTS prime_rates (
   date              DATE,
-  rate                DECIMAL
+  rate              DECIMAL(5, 4)
 );

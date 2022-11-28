@@ -1,4 +1,4 @@
-CREATE TABLE cad_fx ( 
+CREATE TABLE IF NOT EXISTS cad_fx ( 
   date        DATE,
-  rate          DECIMAL
+  rate        DECIMAL(5, 4)
 );
