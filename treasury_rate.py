@@ -38,21 +38,6 @@ df.columns = col_names
 dtype_dict = {}
 for col in col_names:
   if col != 'date':
-    dtype_dict.update({col: DECIMAL(2, 4)})
-  else:
-    dtype_dict.update({col: Date})
-
-# convert to pandas df
-schema_df = pd.DataFrame(schema_info)
-col_names = list(schema_df.column_name)
-
-# update column names within df and upload
-df.columns = col_names
-
-# create data types
-dtype_dict = {}
-for col in col_names:
-  if col != 'date':
     dtype_dict.update({col: DECIMAL})
   else:
     dtype_dict.update({col: Date})
@@ -60,5 +45,4 @@ for col in col_names:
 # upload to SQL
 df.to_sql('treasury_rates', con=engine, if_exists='append', index=False, dtype=dtype_dict)
 
-# close connection
 engine.close()
