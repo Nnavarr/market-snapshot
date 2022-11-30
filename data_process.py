@@ -2,10 +2,7 @@ import pandas as pd
 import sql_connection
 from sqlalchemy.types import Integer, Date, DECIMAL
 
-# import file locations
-filepath = r'./excel/MRKTRATE - 09.21.2022.xlsx'
-
-def data_processing(sheet_name: str, header: int, db_name: str, table_name: str):
+def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, table_name: str):
   """
   Author: Noe Navarro
   Date: 2022-11-29
@@ -49,9 +46,7 @@ def data_processing(sheet_name: str, header: int, db_name: str, table_name: str)
       dtype_dict.update({col: Date})
 
   # upload to SQL
-  df.to_sql(db_name, con=engine, if_exists='replace', index=False)
+  df.to_sql(table_name, con=engine, if_exists='replace', index=False)
 
   # close connection
   engine.close()
-
-
