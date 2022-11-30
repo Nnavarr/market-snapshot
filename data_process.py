@@ -12,11 +12,23 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
   df = pd.read_excel(filepath, sheet_name=sheet_name, header=header)
 
   # rename columns
-  col_names = [x.lower().replace(' ', '_') for x in df.columns.values]
-  df.columns = col_names
+  print('starting statement')
+  if 'cad' in table_name:
+    df = df.iloc[:, 3:5]
+    col_names = ['date', 'rate']
+    df.columns = col_names
 
-  # drop na values, convert to decimal
+  elif 'prime' in table_name:
+    df = df.iloc[:, 0:2]
+    col_names = ['date', 'rate']
+    df.columns = col_names
+  else:
+    col_names = [x.lower().replace(' ', '_') for x in df.columns.values]
+    df.columns = col_names
+
+  # drop na & text values, convert to decimal
   df.dropna(inplace=True)
+  df = df[df.iloc[:, 1].apply(lambda x: isinstance(x, float))]
   for col in col_names[1:]:
     df[col] = round(df[col].astype('float') / 100, 4)
 
@@ -32,7 +44,9 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
 
   # convert to pandas df
   schema_df = pd.DataFrame(schema_info)
+  print(schema_df)
   col_names = list(schema_df.column_name)
+  print(col_names)
 
   # update column names within df and upload
   df.columns = col_names

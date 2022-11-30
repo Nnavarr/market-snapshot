@@ -1,6 +1,3 @@
-import pandas as pd
-import sql_connection
-from sqlalchemy.types import Integer, Date, DECIMAL
 import data_process
 
 # establish excel filepath
