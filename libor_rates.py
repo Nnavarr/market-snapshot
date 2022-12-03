@@ -8,7 +8,6 @@ def main():
     # process data
     data_process.data_processing(filepath, sheet_name='LIBOR Rates', header=2, db_name='market_data', table_name='libor_rates')
   except:
-    #TODO: add logging
     print('there was an error in the process')
 
 if __name__ == '__main__':
