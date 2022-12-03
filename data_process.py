@@ -30,7 +30,9 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
   df.dropna(inplace=True)
   df = df[df.iloc[:, 1].apply(lambda x: isinstance(x, float))]
   for col in col_names[1:]:
-    df[col] = round(df[col].astype('float') / 100, 4)
+    # generate decimal value, exclude volume columns
+    if 'vol' not in col:
+      df[col] = round(df[col].astype('float') / 100, 4)
 
   # import schema from sql table
   engine = sql_connection.conn(db_name, alchemy=True)
