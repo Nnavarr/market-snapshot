@@ -10,9 +10,9 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
     This function was created in order to process the individual rate files.
   """
   df = pd.read_excel(filepath, sheet_name=sheet_name, header=header)
+  print(df.head())
 
   # rename columns
-  print('starting statement')
   if 'cad' in table_name:
     df = df.iloc[:, 3:5]
     col_names = ['date', 'rate']
