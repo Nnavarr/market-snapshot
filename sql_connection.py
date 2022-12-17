@@ -1,20 +1,25 @@
 import psycopg2
-import os
+import sqlalchemy
 from dotenv import load_dotenv
+import os
+
+# load variables
+load_dotenv()
+username = os.getenv('PGUSER')
+password = os.getenv('PGPASSWORD')
 
 # establish connection to postgresql
-def postgresql_con(database):
-  conn = psycopg2.connect(
-    host='localhost',
-    database=database,
-    user=os.getenv('PGUSER'),
-    password=os.getenv('PGPASSWORD')
-  )
-  return conn
-
-# example connection
-# conn = postgresql_con()
-# cursor = conn.cursor()
-# cursor.execute('SELECT version()')
-# cursor.fetchone()
-# cursor.close()
+def conn(database, alchemy=False):
+  if alchemy is False:
+    conn = psycopg2.connect(
+      host='localhost',
+      port=5432,
+      database=database,
+      user=username,
+      password=password
+    )
+    return conn
+  
+  # create sqlalchemy connection (pandas upload)
+  engine = sqlalchemy.create_engine(f'postgresql://postgres:{username}@localhost/{database}')
+  return engine.connect()
