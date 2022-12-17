@@ -1,4 +1,4 @@
-CREATE TABLE swap_rates AS (
-  `date`            DATE,
+CREATE TABLE swap_rates (
+  "date"            DATE,
   rate              DECIMAL
 );

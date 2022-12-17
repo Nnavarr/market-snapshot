@@ -1,14 +1,20 @@
 import psycopg2
 import os
-
-# read password
-with open('./env_var.txt') as f:
-  pg_password = f.readlines()
+from dotenv import load_dotenv
 
 # establish connection to postgresql
-conn = psycopg2.connect(
-  host='localhost',
-  database='postgres',
-  user='postgres',
-  password=pg_password[0]
-)
+def postgresql_con(database):
+  conn = psycopg2.connect(
+    host='localhost',
+    database=database,
+    user=os.getenv('PGUSER'),
+    password=os.getenv('PGPASSWORD')
+  )
+  return conn
+
+# example connection
+# conn = postgresql_con()
+# cursor = conn.cursor()
+# cursor.execute('SELECT version()')
+# cursor.fetchone()
+# cursor.close()

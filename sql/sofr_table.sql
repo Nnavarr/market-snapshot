@@ -1,5 +1,5 @@
-CREATE TABLE sofr AS (
-  `date`              DATE,
+CREATE TABLE sofr (
+  "date"              DATE,
   rate                DECIMAL,
   first_pctl          DECIMAL,
   twenty_fifth_pctl   DECIMAL,
