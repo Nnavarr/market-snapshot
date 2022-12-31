@@ -13,7 +13,7 @@ def conn(database, alchemy=False):
   if alchemy is False:
     conn = psycopg2.connect(
       host='localhost',
-      # port=5432,
+      port=5432,
       database=database,
       user=username,
       password=password
