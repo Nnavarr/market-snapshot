@@ -10,9 +10,7 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
     This function was created in order to process the individual rate files.
   """
   df = pd.read_excel(filepath, sheet_name=sheet_name, header=header)
-  print(df.head())
 
-  print('starting logic for additional data cleaning')
   # rename columns
   if 'cad' in table_name:
     df = df.iloc[:, 3:5]
@@ -27,6 +25,7 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
     col_names = [x.lower().replace(' ', '_') for x in df.columns.values]
     df.columns = col_names
 
+  print(df.head())
   # drop na & text values, convert to decimal
   df.dropna(inplace=True)
   df = df[df.iloc[:, 1].apply(lambda x: isinstance(x, float))]
@@ -47,14 +46,12 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
 
   # convert to pandas df
   schema_df = pd.DataFrame(schema_info)
-  print(schema_df)
   col_names = list(schema_df.column_name)
-  print(col_names)
 
   # update column names within df and upload
   df.columns = col_names
 
-  # create data types
+  # create data type dict to be passed into pandas to_sql 
   dtype_dict = {}
   for col in col_names:
     if col != 'date':
@@ -63,7 +60,9 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
       dtype_dict.update({col: Date})
   
   # upload to SQL
+  print(f'starting upload of {table_name}...')
   df.to_sql(table_name, con=engine, if_exists='replace', index=False, dtype=dtype_dict)
+  print('upload complete!')
 
   # close connection
   engine.close()
