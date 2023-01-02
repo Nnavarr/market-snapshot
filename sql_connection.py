@@ -21,5 +21,5 @@ def conn(database, alchemy=False):
     return conn
   
   # create sqlalchemy connection (pandas upload)
-  engine = sqlalchemy.create_engine(f'postgresql://postgres:{username}@localhost/{database}')
+  engine = sqlalchemy.create_engine(f'postgresql://{username}:{password}@localhost:5432/{database}')
   return engine.connect()
