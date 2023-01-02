@@ -27,7 +27,6 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
     col_names = [x.lower().replace(' ', '_') for x in df.columns.values]
     df.columns = col_names
 
-  print('made it through the initial sequence...')
   # drop na & text values, convert to decimal
   df.dropna(inplace=True)
   df = df[df.iloc[:, 1].apply(lambda x: isinstance(x, float))]
@@ -36,10 +35,8 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
     if 'vol' not in col:
       df[col] = round(df[col].astype('float') / 100, 4)
 
-  print('starting to import table schema')
   # import schema from sql table
   engine = sql_connection.conn(db_name, alchemy=True)
-  print('engine created successfully...')
 
   # import schema info for column names
   schema_info = engine.execute("""
@@ -47,7 +44,6 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
     FROM information_schema.columns
     WHERE table_name = '{}'
   ;""".format(table_name)).fetchall()
-  print('schema fetched successfully...')
 
   # convert to pandas df
   schema_df = pd.DataFrame(schema_info)
@@ -65,11 +61,9 @@ def data_processing(filepath: str, sheet_name: str, header: int, db_name: str, t
       dtype_dict.update({col: DECIMAL})
     else:
       dtype_dict.update({col: Date})
-  print('data processed successfully...')
-
+  
   # upload to SQL
-  df.to_sql(table_name, con=engine, if_exists='replace', index=False)
-  print('table uploaded to SQL successfully!')
+  df.to_sql(table_name, con=engine, if_exists='replace', index=False, dtype=dtype_dict)
 
   # close connection
   engine.close()
