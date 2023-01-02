@@ -108,3 +108,6 @@ venv
 
 # passwords
 env_var.txt
+
+# pycache
+__pycache__/
