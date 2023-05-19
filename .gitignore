@@ -102,3 +102,15 @@ dist
 
 # TernJS port file
 .tern-port
+
+# virtual env
+venv
+
+# passwords
+env_var.txt
+
+# cache
+__pycache__
+
+# excel
+excel/

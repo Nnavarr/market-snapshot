@@ -1,10 +1,10 @@
-CREATE TABLE treasury_rates (
-  `date`            DATE,
-  2_yr_rate         DECIMAL,
-  3_yr_rate         DECIMAL,
-  5_yr_rate         DECIMAL,
-  7_yr_rate         DECIMAL,
-  10_yr_rate        DECIMAL,
-  20_yr_rate        DECIMAL,
-  30_yr_rate        DECIMAL
+CREATE TABLE IF NOT EXISTS treasury_rates (
+  date                DATE,
+  two_yr_rate         DECIMAL(5, 4),
+  three_yr_rate       DECIMAL(5, 4),
+  five_yr_rate        DECIMAL(5, 4),
+  seven_yr_rate       DECIMAL(5, 4),
+  ten_yr_rate         DECIMAL(5, 4),
+  twenty_yr_rate      DECIMAL(5, 4),
+  thirty_yr_rate      DECIMAL(5, 4)
 );
